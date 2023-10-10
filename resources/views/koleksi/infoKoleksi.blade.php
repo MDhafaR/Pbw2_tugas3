@@ -37,6 +37,14 @@
                                     <th class="border px-4 py-2">Jumlah Koleksi</th>
                                     <td class="border px-4 py-2">{{ $collection->jumlahKoleksi }}</td>
                                 </tr>
+                                <tr>
+                                    <th class="border px-4 py-2">Waktu dibuat</th>
+                                    <td class="border px-4 py-2">{{ $collection->created_at }}</td>
+                                </tr>
+                                <tr>
+                                    <th class="border px-4 py-2">Terakhir diubah</th>
+                                    <td class="border px-4 py-2">{{ $collection->updated_at }}</td>
+                                </tr>
                         </table>
                     </div>
                 </div>
