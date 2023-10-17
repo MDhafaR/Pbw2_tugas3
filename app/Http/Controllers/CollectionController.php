@@ -2,18 +2,22 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\Collection;
 use Illuminate\Http\Request;
+use App\DataTables\CollectionsDataTable;
+
 
 class CollectionController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(CollectionsDataTable $dataTable)
     {
-        $collections = Collection::all();
-        return view('koleksi.daftarKoleksi', compact('collections'));
+        // $collections = Collection::all();
+        // return view('koleksi.daftarKoleksi', compact('collections'));
+        return $dataTable->render('koleksi.daftarKoleksi');
     }
 
     /**
@@ -77,4 +81,26 @@ class CollectionController extends Controller
     {
         //
     }
+
+    public function getAllCollections()
+{
+    $collections = DB::table('collections')
+        ->select('id as id', 'nama as judul', DB::raw('
+            CASE
+                WHEN jenis="1" THEN "Buku"
+                WHEN jenis="2" THEN "Majalah"
+                WHEN jenis="3" THEN "Cakram Digital"
+            END AS jenis'), 'jumlah as jumlah')
+        ->orderBy('nama', 'asc')
+        ->get();
+
+    return DataTables::of($collections)
+        ->addColumn('action', function ($collection) {
+            $html = '
+            <button data-rowid="" class="btn btn-xs btn-light" data-toggle="tooltip" data-placement="top" data-container="body" title="Edit Koleksi" onclick="infoKoleksi(' . "'" . $collection->id . "'" . ')"> <i class="fa fa-edit"></i></button>
+            ';
+            return $html;
+        })
+        ->make(true);
+}
 }

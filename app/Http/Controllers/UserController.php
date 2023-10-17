@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\UsersDataTable;  
 use App\Models\User;
 use Hash;
 use Illuminate\Http\Request;
@@ -11,11 +12,16 @@ class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
-     */
-    public function index()
+    //  */
+    // public function index()
+    // {
+    //     $users = User::all();
+    //     return view('user.daftarPengguna', compact('users'));
+    // }
+    // // Muhammad Dhafa Ramadhani - 6706223068 - 4604
+    public function index(UsersDataTable $dataTable)
     {
-        $users = User::all();
-        return view('user.daftarPengguna', compact('users'));
+        return $dataTable->render('user.daftarPengguna');
     }
 
     /**

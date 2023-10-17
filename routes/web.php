@@ -31,7 +31,7 @@ Route::get('/about', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
-
+// Muhammad Dhafa Ramadhani - 6706223068 - 4604
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -45,6 +45,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/koleksiTambah', [CollectionController::class, 'create'])->name('koleksi.registrasi');
     Route::post('/koleksiStore', [CollectionController::class, 'store'])->name('koleksi.daftarKoleksi');
     Route::get('/koleksiView/{collection}', [CollectionController::class, 'show'])->name('koleksi.infoKoleksi');
+
+    route::get('/getAllCollections', [CollectionController::class, 'getAllCollections'])->middleware(['auth', 'verified']);
 });
 
 require __DIR__.'/auth.php';

@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // Muhammad Dhafa Ramadhani - 6706223068
+        // Muhammad Dhafa Ramadhani - 6706223068 - 4604
         Schema::create('collections', function (Blueprint $table) {
             $table->id();
             $table->string('namaKoleksi',100);
