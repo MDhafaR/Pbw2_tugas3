@@ -61,9 +61,10 @@ class CollectionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Collection $collections)
+    // Muhammad Dhafa Ramadhani - 6706223068 - 4604
+    public function edit(Collection $collection)
     {
-        //
+        return view("koleksi.editKoleksi", compact("collection"));
     }
 
     /**
@@ -71,7 +72,18 @@ class CollectionController extends Controller
      */
     public function update(Request $request, Collection $collection)
     {
-        //
+        // Validate the form data
+        $validatedData = $request->validate([
+            'namaKoleksi' => 'required',
+            'jenisKoleksi' => 'required',
+            'jumlahKoleksi' => 'required',
+        ]);
+
+        // Update the collection with the new data
+        $collection->update($request->except(['token_']));
+
+        // Redirect back to the collection view or any other desired page
+        return redirect()->route('koleksi.infoKoleksi', $collection->id);
     }
 
     /**

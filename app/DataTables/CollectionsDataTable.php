@@ -38,10 +38,11 @@ class CollectionsDataTable extends DataTable
                 }
             })
             ->addColumn('action', function (Collection $collection) {
-                return '<div class="btn-group btn-group-sm" role="group" aria-label="Action Buttons">
-                    <a href="/koleksiView/' . $collection->id . '" class="btn btn-gray">View</a>
-                </div>';
-            })
+                return '<div class="btn-group flex btn-group-sm gap-4" role="group" aria-label="Action Buttons">
+                            <a href="/koleksiView/' . $collection->id . '" class="btn btn-gray">View</a>
+                            <a href="/editKoleksi/' . $collection->id . '" class="btn btn-primary">Edit</a>
+                        </div>';
+            })            
             ->setRowId('id');
     }
 

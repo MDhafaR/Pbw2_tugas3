@@ -7,6 +7,7 @@ use App\Models\User;
 use Hash;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules;
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
@@ -76,17 +77,30 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    // Muhammad Dhafa Ramadhani - 6706223068 - 4604
+    public function edit(User $user)
     {
-        //
+        return view('user.editUser', compact('user'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, User $user)
     {
-        //
+        $validatedData = $request->validate([
+            'fullName' => ['required', 'string', 'max:100'],
+            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
+            'address' => ['required', 'string', 'max:1000'],
+            'birthdate' => ['required', 'date'],
+            'phoneNumber' => ['required', 'string', 'max:20'],
+            // 'agama' => ['required', 'string', 'max:20'],
+            // 'jenis_kelamin' => ['required', 'numeric', 'in:0,1'],
+        ]);
+
+        $user->update($validatedData);
+
+        return redirect()->route('user.infoPengguna', $user->id);
     }
 
     /**

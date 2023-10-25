@@ -27,11 +27,11 @@ Route::get('/about', function () {
         "image" => "img/kiri.jpg"
     ]);
 });
-
+// Muhammad Dhafa Ramadhani - 6706223068 - 4604
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
-// Muhammad Dhafa Ramadhani - 6706223068 - 4604
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -41,12 +41,17 @@ Route::middleware('auth')->group(function () {
     Route::get('/userRegistration', [UserController::class, 'create'])->name('user.registrasi');
     Route::post('/userStore', [UserController::class, 'store'])->name('user.daftarPengguna');
     Route::get('/userView/{user} ', [UserController::class, 'show'])->name('user.infoPengguna');
+    Route::get('/editUser/{user}', [UserController::class, 'edit'])->name('user.editUser');
+    Route::post('/updateUser/{user}', [UserController::class, 'update'])->name('user.updateUser');
+
     Route::get('/koleksi', [CollectionController::class, 'index'])->name('koleksi.daftarKoleksi');
     Route::get('/koleksiTambah', [CollectionController::class, 'create'])->name('koleksi.registrasi');
-    Route::post('/koleksiStore', [CollectionController::class, 'store'])->name('koleksi.daftarKoleksi');
+    Route::post('/koleksiStore', [CollectionController::class, 'store'])->name('koleksi.storeKoleksi');
     Route::get('/koleksiView/{collection}', [CollectionController::class, 'show'])->name('koleksi.infoKoleksi');
+    Route::post('/updateKoleksi/{collection}', [CollectionController::class, 'update'])->name('koleksi.updateKoleksi');
+    Route::get('/editKoleksi/{collection}', [CollectionController::class, 'edit'])->name('koleksi.editKoleksi');
 
-    route::get('/getAllCollections', [CollectionController::class, 'getAllCollections'])->middleware(['auth', 'verified']);
+    Route::get('/getAllCollections', [CollectionController::class, 'getAllCollections'])->middleware(['auth', 'verified']);
 });
 
 require __DIR__.'/auth.php';

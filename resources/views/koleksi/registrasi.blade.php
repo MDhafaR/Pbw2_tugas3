@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <form method="POST" action="{{ route('koleksi.daftarKoleksi') }}">
+    <form method="POST" action="{{ route('koleksi.storeKoleksi') }}">
         @csrf
 
         <!-- id -->
